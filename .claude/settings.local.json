@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rustc --version)",
+      "Bash(cargo --version)",
+      "Bash(pnpm --version)",
+      "Bash(cargo install:*)",
+      "Bash(pnpm tauri:*)"
+    ]
+  }
+}

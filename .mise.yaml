@@ -1,0 +1,10 @@
+# mise configuration for MkViewer (Tauri v2 + React + TypeScript)
+# https://mise.jdx.dev/
+
+tools:
+  node: "24"       # React 18 / Vite 5.x / TypeScript 5.x
+  rust: "stable"   # Tauri v2 requires Rust 1.75+
+
+env:
+  # Tauri CLI をローカルにインストールする場合に備えて PATH を通す
+  CARGO_HOME: "{{env.HOME}}/.cargo"

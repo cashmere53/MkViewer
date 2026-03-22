@@ -1,0 +1,258 @@
+/* ──────────────────────────────────────────
+   Settings panel — side panel overlay
+   ────────────────────────────────────────── */
+
+.settings-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+
+.settings-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 101;
+  width: 300px;
+  background: var(--bg);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.settings-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.settings-close {
+  background: none;
+  border: none;
+  color: var(--fg);
+  cursor: pointer;
+  font-size: 15px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.settings-close:hover {
+  background: var(--surface);
+}
+
+.settings-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* ── Section ── */
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.settings-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+  opacity: 0.55;
+}
+
+/* ── Label / Input ── */
+.settings-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.settings-input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 5px 8px;
+  width: 100%;
+  outline: none;
+}
+
+.settings-input:focus {
+  border-color: var(--accent);
+}
+
+.settings-input--short {
+  width: 80px;
+}
+
+.settings-hint {
+  font-size: 12px;
+  margin: 0;
+  opacity: 0.6;
+  line-height: 1.5;
+}
+
+/* ── CSS file picker ── */
+.settings-css-current {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 12px;
+}
+
+.settings-css-filename {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Buttons ── */
+.settings-btn,
+.settings-btn-sm {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--fg);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+.settings-btn:hover,
+.settings-btn-sm:hover {
+  background: var(--border);
+}
+
+.settings-btn {
+  align-self: flex-start;
+}
+
+.settings-btn-danger {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.settings-btn-danger:hover {
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+}
+
+/* ── Zoom slider ── */
+.settings-zoom-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.settings-zoom-slider {
+  flex: 1;
+  accent-color: var(--accent);
+}
+
+.settings-zoom-value {
+  font-size: 12px;
+  min-width: 38px;
+  text-align: right;
+}
+
+/* ── Footer ── */
+.settings-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+/* ── Toolbar settings button ── */
+.settings-button {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--fg);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.about-button {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--fg);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.about-panel {
+  width: min(520px, 94vw);
+}
+
+.about-body {
+  gap: 18px;
+}
+
+.about-list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.about-row {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 13px;
+}
+
+.about-row dt {
+  margin: 0;
+  opacity: 0.65;
+}
+
+.about-row dd {
+  margin: 0;
+  word-break: break-word;
+}
+
+.about-license-text {
+  margin: 0;
+  max-height: min(56vh, 460px);
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--fg);
+  padding: 12px;
+  font-family: var(--user-mono-font-family, "Cascadia Code", Consolas, monospace);
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vscode/
+*.log
+src-tauri/target/
+.DS_Store
+*.env
+.playwright-mcp/
+.claude/

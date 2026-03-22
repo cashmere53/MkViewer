@@ -1,0 +1,226 @@
+.markdown-body {
+  max-width: 980px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.markdown-body pre {
+  overflow: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.markdown-body code {
+  font-family: var(--user-mono-font-family, "Cascadia Code", Consolas, monospace);
+}
+
+/* Syntax highlighting for rehype-highlight (highlight.js classes) */
+.markdown-body pre code.hljs {
+  display: block;
+  color: var(--hljs-fg, #24292f);
+  background: transparent;
+}
+
+:root {
+  --hljs-fg: #24292f;
+  --hljs-comment: #6e7781;
+  --hljs-keyword: #cf222e;
+  --hljs-title: #8250df;
+  --hljs-string: #0a3069;
+  --hljs-number: #0550ae;
+  --hljs-built-in: #953800;
+}
+
+:root[data-theme="dark"] {
+  --hljs-fg: #e6edf3;
+  --hljs-comment: #8b949e;
+  --hljs-keyword: #ff7b72;
+  --hljs-title: #d2a8ff;
+  --hljs-string: #a5d6ff;
+  --hljs-number: #79c0ff;
+  --hljs-built-in: #ffa657;
+}
+
+.markdown-body .hljs-comment,
+.markdown-body .hljs-quote {
+  color: var(--hljs-comment);
+}
+
+.markdown-body .hljs-keyword,
+.markdown-body .hljs-selector-tag,
+.markdown-body .hljs-subst,
+.markdown-body .hljs-literal,
+.markdown-body .hljs-section,
+.markdown-body .hljs-link {
+  color: var(--hljs-keyword);
+}
+
+.markdown-body .hljs-title,
+.markdown-body .hljs-name,
+.markdown-body .hljs-selector-id,
+.markdown-body .hljs-selector-class,
+.markdown-body .hljs-type,
+.markdown-body .hljs-attr {
+  color: var(--hljs-title);
+}
+
+.markdown-body .hljs-string,
+.markdown-body .hljs-symbol,
+.markdown-body .hljs-bullet,
+.markdown-body .hljs-addition,
+.markdown-body .hljs-template-tag,
+.markdown-body .hljs-template-variable {
+  color: var(--hljs-string);
+}
+
+.markdown-body .hljs-number,
+.markdown-body .hljs-meta,
+.markdown-body .hljs-deletion {
+  color: var(--hljs-number);
+}
+
+.markdown-body .hljs-built_in,
+.markdown-body .hljs-variable,
+.markdown-body .hljs-params,
+.markdown-body .hljs-attribute {
+  color: var(--hljs-built-in);
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.markdown-body th,
+.markdown-body td {
+  border: 1px solid var(--border);
+  padding: 6px 8px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+}
+
+.mermaid-loading {
+  padding: 10px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
+.mermaid-error {
+  color: var(--danger);
+}
+
+.mermaid-block {
+  overflow-x: auto;
+}
+
+/* ──────────────────────────────────────────
+   Callouts / Alerts
+   ────────────────────────────────────────── */
+
+.callout {
+  border-left: 4px solid var(--callout-color, var(--accent));
+  background: color-mix(in srgb, var(--callout-color, var(--accent)) 8%, transparent);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin: 1em 0;
+}
+
+.callout-title {
+  font-weight: 600;
+  font-size: 0.875em;
+  margin-bottom: 6px;
+  color: var(--callout-color, var(--accent));
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.callout-content > :first-child {
+  margin-top: 0;
+}
+
+.callout-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* GitHub Alerts */
+.callout-note      { --callout-color: #0969da; }
+.callout-tip       { --callout-color: #1a7f37; }
+.callout-important { --callout-color: #8250df; }
+.callout-warning   { --callout-color: #9a6700; }
+.callout-caution   { --callout-color: #cf222e; }
+
+/* Obsidian-compatible – information */
+.callout-info,
+.callout-abstract,
+.callout-summary,
+.callout-tldr,
+.callout-todo     { --callout-color: #0ea5e9; }
+
+/* Obsidian-compatible – success */
+.callout-hint,
+.callout-success,
+.callout-check,
+.callout-done     { --callout-color: #1a7f37; }
+
+/* Obsidian-compatible – question */
+.callout-question,
+.callout-help,
+.callout-faq      { --callout-color: #ec4899; }
+
+/* Obsidian-compatible – warning extension */
+.callout-attention { --callout-color: #9a6700; }
+
+/* Obsidian-compatible – failure/danger */
+.callout-failure,
+.callout-fail,
+.callout-missing,
+.callout-danger,
+.callout-error,
+.callout-bug      { --callout-color: #cf222e; }
+
+/* Obsidian-compatible – misc */
+.callout-example  { --callout-color: #8250df; }
+.callout-quote,
+.callout-cite     { --callout-color: #6b7280; }
+
+/* Dark-mode color adjustments */
+:root[data-theme="dark"] .callout-note      { --callout-color: #58a6ff; }
+:root[data-theme="dark"] .callout-tip,
+:root[data-theme="dark"] .callout-hint,
+:root[data-theme="dark"] .callout-success,
+:root[data-theme="dark"] .callout-check,
+:root[data-theme="dark"] .callout-done      { --callout-color: #3fb950; }
+:root[data-theme="dark"] .callout-important { --callout-color: #d2a8ff; }
+:root[data-theme="dark"] .callout-warning,
+:root[data-theme="dark"] .callout-caution,
+:root[data-theme="dark"] .callout-attention { --callout-color: #e3b341; }
+:root[data-theme="dark"] .callout-caution,
+:root[data-theme="dark"] .callout-failure,
+:root[data-theme="dark"] .callout-fail,
+:root[data-theme="dark"] .callout-missing,
+:root[data-theme="dark"] .callout-danger,
+:root[data-theme="dark"] .callout-error,
+:root[data-theme="dark"] .callout-bug      { --callout-color: #f85149; }
+
+/* ──────────────────────────────────────────
+   Color swatches inside code elements
+   ────────────────────────────────────────── */
+
+.color-swatch {
+  display: inline-block;
+  width: 0.72em;
+  height: 0.72em;
+  background: var(--swatch-color, transparent);
+  border: 1px solid rgba(128, 128, 128, 0.45);
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 2px;
+  position: relative;
+  top: -1px;
+  flex-shrink: 0;
+}
