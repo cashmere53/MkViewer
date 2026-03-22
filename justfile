@@ -99,9 +99,11 @@ clean:
     cargo clean --manifest-path src-tauri/Cargo.toml
     if (Test-Path dist) { Remove-Item -Recurse -Force dist }
     if (Test-Path "node_modules/.cache") { Remove-Item -Recurse -Force "node_modules/.cache" }
+    Get-ChildItem -Path src -Recurse -Filter "*.js" | Remove-Item -Force
 
 # 完全クリーンアップ (node_modules も削除)
 clean-all:
     cargo clean --manifest-path src-tauri/Cargo.toml
     if (Test-Path dist) { Remove-Item -Recurse -Force dist }
     if (Test-Path node_modules) { Remove-Item -Recurse -Force node_modules }
+    Get-ChildItem -Path src -Recurse -Filter "*.js" | Remove-Item -Force
