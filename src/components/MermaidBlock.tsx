@@ -8,6 +8,33 @@ type MermaidBlockProps = {
 let lastTheme: string | null = null;
 let renderQueue: Promise<void> = Promise.resolve();
 
+/**
+ * Mermaid sequence-diagram `rect rgba(...)` blocks use a `fill` presentation
+ * attribute on `<rect class="rect">` elements.  In dark mode the theme's SVG
+ * `<style>` sets `fill` on the SVG root; some browser / WebView2 environments
+ * then inherit or override that value, rendering those sections solid black.
+ *
+ * Converting the presentation attribute to an inline `style` gives it the
+ * highest CSS specificity and ensures the colour is always honoured.
+ */
+function fixRectFills(svgStr: string): string {
+  return svgStr.replace(/<rect\b([^>]*)\bclass="rect"([^>]*)>/g, (match) => {
+    const fillMatch = /\bfill="([^"]+)"/.exec(match);
+    if (!fillMatch) return match;
+    const fill = fillMatch[1];
+    const withoutFill = match.replace(/\s*\bfill="[^"]+"/, "");
+    const existingStyle = /\bstyle="([^"]*)"/.exec(withoutFill);
+    if (existingStyle) {
+      return withoutFill.replace(
+        /\bstyle="([^"]*)"/,
+        `style="fill:${fill};${existingStyle[1]}"`,
+      );
+    }
+    // Replace trailing `/>` or `>` while preserving the original closing syntax
+    return withoutFill.replace(/(\s*)(\/?>)$/, (_, ws, close) => ` style="fill:${fill}"${ws}${close}`);
+  });
+}
+
 function useMermaidTheme(): string {
   const [theme, setTheme] = useState<string>(
     () => document.documentElement.dataset.theme ?? "light",
@@ -47,7 +74,7 @@ export function MermaidBlock({ source }: MermaidBlockProps) {
       const run = async () => {
         try {
           const rendered = await mermaid.render(id, source);
-          const nextSvg = rendered.svg.trim();
+          const nextSvg = fixRectFills(rendered.svg.trim());
           if (disposed) {
             return;
           }
