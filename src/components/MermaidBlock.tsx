@@ -5,19 +5,40 @@ type MermaidBlockProps = {
   source: string;
 };
 
-let initialized = false;
+let lastTheme: string | null = null;
 let renderQueue: Promise<void> = Promise.resolve();
+
+function useMermaidTheme(): string {
+  const [theme, setTheme] = useState<string>(
+    () => document.documentElement.dataset.theme ?? "light",
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setTheme(document.documentElement.dataset.theme ?? "light");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+}
 
 export function MermaidBlock({ source }: MermaidBlockProps) {
   const [svg, setSvg] = useState("");
   const [error, setError] = useState("");
+  const appTheme = useMermaidTheme();
 
   const id = useMemo(() => `mmd-${Math.random().toString(36).slice(2)}`, []);
 
   useEffect(() => {
-    if (!initialized) {
-      mermaid.initialize({ startOnLoad: false, securityLevel: "strict" });
-      initialized = true;
+    const mermaidTheme = appTheme === "dark" ? "dark" : "default";
+    if (lastTheme !== mermaidTheme) {
+      mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: mermaidTheme });
+      lastTheme = mermaidTheme;
     }
 
     let disposed = false;
@@ -57,7 +78,7 @@ export function MermaidBlock({ source }: MermaidBlockProps) {
     return () => {
       disposed = true;
     };
-  }, [id, source]);
+  }, [id, source, appTheme]);
 
   if (error) {
     return (
